@@ -222,35 +222,18 @@ public class SpotifyRepository {
         return song;
     }
 
-    public List<String> getArtists(Song song) {
-        List<String> artists = new ArrayList<>();
-        for (Map.Entry<String, List<Song>> entry : artistSongMap.entrySet()) {
-            if (entry.getValue().contains(song)) {
-                artists.add(entry.getKey());
-            }
-        }
-        return artists;
-    }
-
     public String mostPopularArtist() {
-        Map<String, Integer> artistCountMap = new HashMap<>();
-        int maxCount = 0;
-        String mostPopularArtist = null;
-        for (Song song : songs) {
-            List<String> artists = getArtists(song);
-            for (String artist : artists) {
-                int count = artistCountMap.getOrDefault(artist, 0) + 1;
-                artistCountMap.put(artist, count);
-                if (count > maxCount) {
-                    maxCount = count;
-                    mostPopularArtist = artist;
-                }
+        int maxLikes = Integer.MIN_VALUE;
+        String mstPopArtist = "";
+        for (Artist artist : artists){
+            int numberOfLikes = artist.getLikes();
+            if (numberOfLikes > maxLikes){
+                maxLikes = numberOfLikes;
+                mstPopArtist = artist.getName();
             }
         }
-        return mostPopularArtist;
+        return mstPopArtist;
     }
-
-
 
 
     public String mostPopularSong()
