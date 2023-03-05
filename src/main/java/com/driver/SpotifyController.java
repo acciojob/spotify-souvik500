@@ -55,7 +55,7 @@ public class SpotifyController {
         //Create a playlist with given title and add all songs having the given titles in the database to that playlist
         //The creater of the playlist will be the given user and will also be the only listener at the time of playlist creation
         //If the user does not exist, throw "User does not exist" exception
-
+        createPlaylistOnName(mobile, title, songTitles);
         return "Success";
     }
 
@@ -66,7 +66,7 @@ public class SpotifyController {
         //If the user does not exist, throw "User does not exist" exception
         //If the playlist does not exists, throw "Playlist does not exist" exception
         // Return the playlist after updating
-
+        findPlaylist(mobile, playlistTitle);
         return "Success";
     }
 
@@ -78,19 +78,19 @@ public class SpotifyController {
         //If the user does not exist, throw "User does not exist" exception
         //If the song does not exist, throw "Song does not exist" exception
         //Return the song after updating
-
+        likeSong(mobile, songTitle);
         return "Success";
     }
 
     @GetMapping("/popular-artist")
     public String mostPopularArtist(){
         //Return the artist name with maximum likes
-
+        return mostPopularArtist();
     }
 
     @GetMapping("/popular-song")
     public String mostPopularSong(){
         //return the song title with maximum likes
-
+        return mostPopularSong();
     }
 }
