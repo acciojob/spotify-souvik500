@@ -37,19 +37,58 @@ public class SpotifyRepository {
         artists = new ArrayList<>();
     }
 
-    public User createUser(String name, String mobile) {
+    public User createUser(String name, String mobile)
+    {
+        User u = new User(name, mobile);
+        users.add(u);
+        return u;
+        //users.add(new User(name, mobile));
     }
 
-    public Artist createArtist(String name) {
+    public Artist createArtist(String name)
+    {
+        Artist artist = new Artist(name);
+        artists.add(artist);
+        return artist;
     }
 
-    public Album createAlbum(String title, String artistName) {
+    public Album createAlbum(String title, String artistName)
+    {
+        Artist a = new Artist(artistName);
+        if (! artists.contains(artistName)) artists.add(a);
+        if (! albums.contains(title)) albums.add(new Album(title));
+
+        artistAlbumMap.put(a, albums);
+        return null;
     }
 
-    public Song createSong(String title, String albumName, int length) throws Exception{
+    public Song createSong(String title, String albumName, int length) throws Exception
+    {
+        Album a = new Album(albumName);
+        if (! albums.contains(albumName)) throw new Exception("Album does not exist");
+
+        Song s = new Song(title, length);
+        songs.add(s);
+
+        List<Song> songList = new ArrayList<>();
+        if (albumSongMap.containsKey(a)) songList = albumSongMap.get(a);
+
+        songList.add(s);
+        albumSongMap.put(a, songList);
+
+        return  s;
     }
 
-    public Playlist createPlaylistOnLength(String mobile, String title, int length) throws Exception {
+    public Playlist createPlaylistOnLength(String mobile, String title, int length) throws Exception
+    {
+        Playlist pl = new Playlist(title);
+        if (!playlists.contains(title)) playlists.add(pl);
+
+        List<Song> songList = new ArrayList<>();
+        if (playlistSongMap.containsKey(pl)) songList = playlistSongMap.get(pl);
+        songList.add(new Song(title, length));
+        playlistSongMap.put(pl, songList);
+
 
     }
 

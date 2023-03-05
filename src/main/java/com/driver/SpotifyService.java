@@ -12,19 +12,19 @@ public class SpotifyService {
     SpotifyRepository spotifyRepository = new SpotifyRepository();
 
     public User createUser(String name, String mobile){
-
+        return createUser(name, mobile);
     }
 
     public Artist createArtist(String name) {
-
+        return createArtist(name);
     }
 
     public Album createAlbum(String title, String artistName) {
-
+        return createAlbum(title, artistName);
     }
 
     public Song createSong(String title, String albumName, int length) throws Exception {
-
+        return createSong(title, albumName, length);
     }
 
     public Playlist createPlaylistOnLength(String mobile, String title, int length) throws Exception {
